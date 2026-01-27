@@ -1,0 +1,7 @@
+* [🏠 首页](README.md)
+* [🚀 快速开始](getting-started.md)
+* [🔧 功能指南](guide/README.md)
+    * [配置订阅](guide/config.md)
+    * [应用分流](guide/apps.md)
+* [🔄 迁移指南](migration.md)
+* [❓ 常见问题](faq.md)
