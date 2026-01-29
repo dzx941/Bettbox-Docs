@@ -8,10 +8,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
   <link rel="icon" href="favicon.png" type="image/x-icon" />
+
+  <style>
+    :root { --accent: #42b983; }
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #1c1c1c; color: #e0e0e0; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/style.min.css">
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
   <div id="app">加载中...</div>
+
   <script>
     window.$docsify = {
       name: 'Bettbox',
@@ -22,16 +32,40 @@
         '/.*/_sidebar.md': '/_sidebar.md'
       },
       auto2top: true,
+      // 搜索插件配置
       search: {
         placeholder: '搜索',
         noData: '找不到结果',
         depth: 6
+      },
+      // 暗黑模式核心配置
+      darklightTheme: {
+        defaultTheme: 'auto',  // 自动识别系统主题
+        siteFont: "PT Sans",
+        dark: {
+          accent: 'var(--accent)',
+          background: '#1c1c1c',
+          textColor: '#e0e0e0',
+          codeBackground: '#2d2d2d'
+        },
+        light: {
+          accent: 'var(--accent)',
+          background: '#ffffff',
+          textColor: '#34495e',
+          codeBackground: '#f8f8f8'
+        }
       }
     }
   </script>
+
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
+  
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
+
+  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
 </body>
-</html>
+</html></html>
