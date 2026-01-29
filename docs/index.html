@@ -5,40 +5,25 @@
   <title>Bettbox 文档 - 现代化的安卓代理工具</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  
   <link rel="icon" href="favicon.png" type="image/x-icon" />
 
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/style.min.css">
 
   <style>
-    /* 强制正文、侧边栏、代码块适配变量 */
-    body, #app, .content, .sidebar, .sidebar-nav {
+    /* 强效补丁：确保全量变色 */
+    body, #app, .content, .sidebar, .sidebar-nav, .search, .search input {
       background-color: var(--background) !important;
       color: var(--textColor) !important;
     }
+    .sidebar-nav li a { color: var(--textColor) !important; }
+    .sidebar-nav li.active > a { color: var(--accent) !important; border-right: 2px solid var(--accent); }
     
-    /* 侧边栏标题与链接颜色补齐 */
-    .sidebar-nav li a {
-      color: var(--textColor) !important;
-    }
-
-    /* 选中项颜色 */
-    .sidebar-nav li.active > a {
-      color: var(--accent) !important;
-      border-right: 2px solid var(--accent);
-    }
-
+    /* 修正搜索框在暗黑模式下的边框 */
+    .search input { border: 1px solid var(--accent) !important; }
+    
     /* 平滑过渡效果 */
-    * {
-      transition: background-color 0.1s ease, color 0.1s ease;
-    }
-
-    /* 修复搜索结果列表的背景 */
-    .search input {
-      background: var(--background) !important;
-      color: var(--textColor) !important;
-    }
+    * { transition: background-color 0.2s ease, color 0.2s ease; }
   </style>
 </head>
 <body>
@@ -52,17 +37,15 @@
       subMaxLevel: 2,
       alias: { '/.*/_sidebar.md': '/_sidebar.md' },
       auto2top: true,
-      
-      // 搜索插件
+      // 搜索配置：仅此一份
       search: {
         placeholder: '搜索',
         noData: '找不到结果',
         depth: 6
       },
-
-      // 暗黑模式核心配置
+      // 暗黑模式配置：仅此一份
       darklightTheme: {
-        defaultTheme: 'auto', // 自动识别系统主题
+        defaultTheme: 'auto',
         siteFont: "PT Sans",
         dark: {
           accent: '#42b983',
@@ -81,48 +64,14 @@
   </script>
 
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
+  
+  <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  
-  <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
 
   <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
 </body>
-</html>        placeholder: '搜索',
-        noData: '找不到结果',
-        depth: 6
-      },
-      // 暗黑模式核心配置
-      darklightTheme: {
-        defaultTheme: 'auto',  // 自动识别系统主题
-        siteFont: "PT Sans",
-        dark: {
-          accent: 'var(--accent)',
-          background: '#1c1c1c',
-          textColor: '#e0e0e0',
-          codeBackground: '#2d2d2d'
-        },
-        light: {
-          accent: 'var(--accent)',
-          background: '#ffffff',
-          textColor: '#34495e',
-          codeBackground: '#f8f8f8'
-        }
-      }
-    }
-  </script>
-
-  <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
-  
-  <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
-
-  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
-</body>
-</html></html>
+</html>
