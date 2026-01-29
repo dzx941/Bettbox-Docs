@@ -42,9 +42,15 @@
       auto2top: true,
       // 这里的相对路径会自动匹配当前语言文件夹下的侧边栏
       alias: {
-        '/en/.*/_sidebar.md': '/en/_sidebar.md',
-        '/.*/_sidebar.md': '/_sidebar.md',
-        '/en/': '/en/README.md'
+        // 1. 匹配所有以 /en/ 开头的二级、三级目录，强制指向英文侧边栏
+        '/en/(.*)/_sidebar.md': '/en/_sidebar.md',
+        
+        // 2. 匹配根目录下英文文件夹的首页
+        '/en/': '/en/README.md',
+
+        // 3. 匹配中文版的子目录侧边栏（排除掉 /en/ 开头的路径）
+        // 这里的 [^en].* 是为了防止中文规则抢占英文规则
+        '/((?!en).+)/_sidebar.md': '/_sidebar.md',
       },
       // 根据路径自动切换首页链接
       nameLink: {
