@@ -2,93 +2,84 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Bettbox 文档 - 现代化的安卓代理工具</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Bettbox (原 LiClash) 官方使用文档">
+  <title>Bettbox Docs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  
   <link rel="icon" href="favicon.png" type="image/x-icon" />
 
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/style.min.css">
 
   <style>
-    /* 全量变色补丁：确保所有组件同步切换 */
     body, #app, .content, .sidebar, .sidebar-nav, .search, .search input {
       background-color: var(--background) !important;
       color: var(--textColor) !important;
     }
-
-    /* 侧边栏链接颜色 */
     .sidebar-nav li a { color: var(--textColor) !important; }
-    .sidebar-nav li.active > a { 
-      color: var(--accent) !important; 
-      border-right: 2px solid var(--accent); 
-    }
-    
-    /* 搜索框美化 */
+    .sidebar-nav li.active > a { color: var(--accent) !important; border-right: 2px solid var(--accent); }
     .search input { border: 1px solid var(--accent) !important; }
+    .github-corner svg { fill: var(--textColor) !important; color: var(--background) !important; transition: all 0.2s; }
+    * { transition: background-color 0.2s, color 0.2s; }
     
-    /* GitHub 图标变色：让图标随模式自动反转颜色 */
-    .github-corner svg {
-      fill: var(--textColor) !important; /* 角标背景跟随文字颜色 */
-      color: var(--background) !important; /* 猫咪颜色跟随网页背景 */
-      transition: fill 0.2s ease, color 0.2s ease;
-    }
-
-    /* 全局过渡动画 */
-    * { transition: background-color 0.2s ease, color 0.2s ease; }
+    /* 语言切换器样式优化 */
+    .language-picker { position: fixed; top: 10px; right: 60px; z-index: 10; }
+    .language-picker a { font-size: 14px; text-decoration: none; color: var(--accent); font-weight: bold; border: 1px solid var(--accent); padding: 2px 8px; border-radius: 4px; }
   </style>
 </head>
 <body>
-  <div id="app">加载中...</div>
+  <div class="language-picker">
+    <a href="#/">CN</a> | <a href="#/en/">EN</a>
+  </div>
+
+  <div id="app">Loading...</div>
 
   <script>
     window.$docsify = {
       name: 'Bettbox',
       repo: 'https://github.com/dzx941/Bettbox-Docs',
-      loadSidebar: true,
-      subMaxLevel: 2,
-      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
-      auto2top: true,
       
-      // 搜索插件配置
-      search: {
-        placeholder: '搜索',
-        noData: '找不到结果',
-        depth: 6
+      // 1. 多语言配置核心
+      loadSidebar: true,
+      auto2top: true,
+      // 这里的相对路径会自动匹配当前语言文件夹下的侧边栏
+      alias: {
+        '/en/.*/_sidebar.md': '/en/_sidebar.md',
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/en/': '/en/README.md'
+      },
+      // 根据路径自动切换首页链接
+      nameLink: {
+        '/en/': '#/en/',
+        '/': '#/'
       },
 
-      // 暗黑模式配置：默认自动识别系统，支持手动切换
+      // 2. 搜索插件适配多语言
+      search: {
+        paths: 'auto',
+        placeholder: {
+          '/en/': 'Search',
+          '/': '搜索'
+        },
+        noData: {
+          '/en/': 'No Results',
+          '/': '找不到结果'
+        }
+      },
+
       darklightTheme: {
         defaultTheme: 'auto',
-        siteFont: "PT Sans",
-        dark: {
-          accent: '#42b983',
-          background: '#1c1c1c',
-          textColor: '#e0e0e0',
-          codeBackground: '#2d2d2d'
-        },
-        light: {
-          accent: '#42b983',
-          background: '#ffffff',
-          textColor: '#34495e',
-          codeBackground: '#f8f8f8'
-        }
+        dark: { accent: '#42b983', background: '#1c1c1c', textColor: '#e0e0e0' },
+        light: { accent: '#42b983', background: '#ffffff', textColor: '#34495e' }
       }
     }
   </script>
 
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
-  
   <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
-
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
   <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
 </body>
 </html>
