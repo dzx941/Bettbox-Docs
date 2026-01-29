@@ -1,0 +1,7 @@
+* [🏠 Home](en/README.md)
+* [🚀 Getting Started](en/getting-started.md)
+* [🔧 Feature Guide](en/guide/README.md)
+    * [Configuration](en/guide/config.md)
+    * [App Split Tunneling](en/guide/apps.md)
+* [🔄 Migration Guide](en/migration.md)
+* [❓ FAQ](en/faq.md)
