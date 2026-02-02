@@ -46,6 +46,7 @@ npm i docsify-cli -g
 ```
 docsify serve .
 ```
+打开浏览器访问：http://localhost:3000。修改 .md 文件后页面将 **自动实时刷新。**
 ## 📂 目录结构
 
 ```text
