@@ -6,7 +6,7 @@
 
 ### 2. How to prevent the app from being killed in the background?
 Due to Android system limitations, please try the following steps:
-1.  Go to **More → Others** and enable **Enhanced Background** and **Sleep Support**.
+1.  Go to <kbd>More</kbd> ➜ <kbd>Others</kbd> and enable **Enhanced Background** and **Sleep Support**.
 2.  In the system task manager (Recents screen), "Lock" the Bettbox app by clicking the **Lock icon**.
 3.  In System Settings, set Bettbox's battery optimization to **Unrestricted**.
 4.  Enable "Persistent Notification Bar."
