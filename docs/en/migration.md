@@ -48,7 +48,9 @@ In **FlClash**:
 ### ❓ FAQ
 
 **Q: Why can't I perform a speed test after importing my FlClash config?**
+
 A: Please go to <kbd>More</kbd> -> <kbd>Resources</kbd> and ensure that the GeoIP and GeoSite databases are fully downloaded.
 
-**Q: Are all features from the original FlClash available?**
-A: Not necessarily. For example, Bettbox does not include the "IP Display" feature.
+**Q: Does it retain all the features from the original FlClash?**
+
+A: Over 90% of the original features are present, with several new enhancements and exclusive features added.
