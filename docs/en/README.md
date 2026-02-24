@@ -13,4 +13,4 @@ Bettbox (formerly LiClash) is an Android proxy tool developed based on a fork of
 * **Extreme Performance**: Compared to the original version, Bettbox focuses more on background persistence and low power consumption for Android.
 
 ---
-[Go to Download Page](https://t.me/appshub_channel)
+[Go to Download Page](https://github.com/appshubcc/Bettbox)
