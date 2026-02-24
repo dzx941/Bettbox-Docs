@@ -16,7 +16,7 @@
       --corner-octo: #fff;
     }
     
-    /* 1. GitHub 挂角自适应深色模式 */
+    /* 1. GitHub 挂角自适应 */
     body.light { --corner-bg: var(--accent); --corner-octo: #fff; }
     body.dark { --corner-bg: #161b22; --corner-octo: var(--accent); }
 
@@ -27,14 +27,20 @@
       z-index: 99;
     }
 
-    /* 2. 导航栏位置微调（避开挂角） */
+    /* 2. 导航栏 (Navbar) 位置微调 */
     .app-nav {
       margin: 15px 60px 0 0 !important;
       z-index: 100 !important;
     }
     
-    body.dark .app-nav li, body.dark .app-nav a {
+    body.dark .app-nav li, body.dark .app-nav a, body.dark .app-nav strong {
       color: #c9d1d9 !important;
+    }
+    
+    /* 下拉菜单背景适配 */
+    body.dark .app-nav li ul {
+      background-color: #161b22 !important;
+      border-color: #30363d !important;
     }
 
     /* 3. 进度条 */
@@ -76,20 +82,22 @@
       name: 'Bettbox Docs',
       repo: 'appshubcc/Bettbox',
       
-      // 因为 index.html 就在 docs 文件夹内，不需要 basePath
       basePath: '', 
-      
       loadSidebar: true,
-      loadNavbar: true,
+      loadNavbar: true, // 必须开启
       auto2top: true,
       subMaxLevel: 3,
 
-      // 路由别名修正
+      // 【核心配置】别名映射逻辑，实现多语言顶栏切换
       alias: {
-        '/.*/_navbar.md': '/_navbar.md',
-        '/.*/_sidebar.md': '/_sidebar.md',
+        // 英文环境映射
+        '/en/_navbar.md': '/en/_navbar.md',
+        '/en/_sidebar.md': '/en/_sidebar.md',
         '/en/': '/en/README.md',
-        '/en/_sidebar.md': '/en/_sidebar.md'
+        
+        // 默认（中文）环境映射
+        '/_navbar.md': '/_navbar.md',
+        '/_sidebar.md': '/_sidebar.md'
       },
 
       // 搜索配置
