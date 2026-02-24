@@ -27,7 +27,7 @@
       z-index: 99;
     }
 
-    /* 2. 导航栏 (Language 菜单) 位置微调 */
+    /* 2. 导航栏位置微调（避开挂角） */
     .app-nav {
       margin: 15px 60px 0 0 !important;
       z-index: 100 !important;
@@ -36,7 +36,7 @@
     body.dark .app-nav li, body.dark .app-nav a {
       color: #c9d1d9 !important;
     }
-    
+
     /* 3. 进度条 */
     .progress-bar {
       position: fixed;
@@ -46,7 +46,6 @@
       height: 3px;
       background-color: var(--accent);
       z-index: 1001;
-      transition: width 0.2s;
     }
 
     /* 4. 返回顶部 */
@@ -54,8 +53,6 @@
       background-color: var(--accent) !important;
       color: #fff !important;
       border-radius: 50% !important;
-      width: 40px !important;
-      height: 40px !important;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
@@ -67,7 +64,6 @@
       padding: 2px 6px;
       font-weight: bold;
       border: none;
-      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -80,20 +76,20 @@
       name: 'Bettbox Docs',
       repo: 'appshubcc/Bettbox',
       
-      // 重要：指向你的文档存放目录
-      basePath: '/docs/', 
+      // 因为 index.html 就在 docs 文件夹内，不需要 basePath
+      basePath: '', 
       
       loadSidebar: true,
-      loadNavbar: true, // 必须开启以加载 docs/_navbar.md
+      loadNavbar: true,
       auto2top: true,
       subMaxLevel: 3,
 
-      // 路由别名，确保多语言路径正确
+      // 路由别名修正
       alias: {
-        '/.*/_navbar.md': '_navbar.md',
-        '/.*/_sidebar.md': '_sidebar.md',
-        '/en/': 'en/README.md',
-        '/en/_sidebar.md': 'en/_sidebar.md'
+        '/.*/_navbar.md': '/_navbar.md',
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/en/': '/en/README.md',
+        '/en/_sidebar.md': '/en/_sidebar.md'
       },
 
       // 搜索配置
@@ -104,7 +100,7 @@
         noData: { '/en/': 'No results!', '/': '未找到结果' }
       },
 
-      // 深色模式配置
+      // 深色模式
       darklightTheme: {
         siteFont: 'PT Sans',
         defaultTheme: 'light',
@@ -112,7 +108,7 @@
         light: { accent: '#42b983', background: '#ffffff', textColor: '#24292f' }
       },
 
-      // 返回顶部配置
+      // 返回顶部
       scrollToTop: {
         auto: true,
         text: '↑',
