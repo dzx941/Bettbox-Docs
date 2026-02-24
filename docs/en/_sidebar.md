@@ -5,3 +5,4 @@
     * [App Split Tunneling](en/guide/apps.md)
 * [🔄 Migration Guide](en/migration.md)
 * [❓ FAQ](en/faq.md)
+* [💬 Support & Feedback](en/contact.md)
