@@ -12,4 +12,4 @@ Bettbox (原名 LiClash) 是一款基于 **FlClash** 分支开发的 Android 代
 * **极致性能**：比原版更注重安卓端的后台保活与低功耗表现。
 
 ---
-[前往下载页面](https://t.me/appshub_channel)
+[前往下载页面](https://github.com/appshubcc/Bettbox)
