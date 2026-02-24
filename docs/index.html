@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Bettbox Docs - 现代化 Android 代理工具指南</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Bettbox (原名 LiClash) 官方文档，基于 Mihomo 内核的 Android 代理工具">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
@@ -13,66 +12,29 @@
   <style>
     :root {
       --accent: #42b983;
-      --docsify-progress-height: 3px;
-      /* 定义挂角颜色变量 */
-      --github-corner-bg: var(--accent);
-      --github-corner-color: #ffffff;
+      --corner-bg: var(--accent);
+      --corner-octo: #fff;
     }
     
-    /* 1. 挂角随主题变化逻辑 */
-    body.dark {
-      /* 深色模式下，挂角背景改为更深邃的颜色或保持强调色 */
-      --github-corner-bg: #161b22; 
-      --github-corner-color: var(--accent);
-    }
-    
+    /* 1. 挂角颜色强制适配 */
+    body.light { --corner-bg: var(--accent); --corner-octo: #fff; }
+    body.dark { --corner-bg: #161b22; --corner-octo: var(--accent); }
+
     .github-corner svg {
-      fill: var(--github-corner-bg) !important;
-      color: var(--github-corner-color) !important;
+      fill: var(--corner-bg) !important;
+      color: var(--corner-octo) !important;
       transition: all 0.3s ease;
     }
 
-    /* 2. 按钮风格 (KBD) */
-    kbd {
-      background-color: var(--accent);
-      color: #ffffff !important;
-      border-radius: 4px;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
-      padding: 2px 6px;
-      margin: 0 2px;
-      font-family: inherit;
-      font-size: 0.85em;
-      font-weight: bold;
-      display: inline-block;
-    }
+    /* 2. 导航栏样式微调（确保在深色模式可见） */
+    .app-nav { margin: 25px 60px 0 0; position: absolute; right: 0; text-align: right; z-index: 10; }
+    body.dark .app-nav li, body.dark .app-nav a { color: #c9d1d9; }
+    .app-nav li { display: inline-block; margin: 0 10px; padding: 0; position: relative; list-style: none; }
 
-    /* 3. 阅读进度条 */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: var(--docsify-progress-height);
-      background-color: var(--accent);
-      z-index: 999;
-      transition: width 0.2s;
-    }
-
-    /* 4. 返回顶部小火箭 */
-    .scroll-to-top {
-      background-color: var(--accent) !important;
-      color: #fff !important;
-      border-radius: 50% !important;
-      width: 40px !important;
-      height: 40px !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-    }
-
-    /* 5. 导航栏自适应 */
-    body.dark .app-nav a {
-      color: #c9d1d9;
-    }
+    /* 3. 其他组件 */
+    kbd { background-color: var(--accent); color: #ffffff !important; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
+    .progress-bar { position: fixed; top: 0; left: 0; width: 0; height: 3px; background-color: var(--accent); z-index: 999; }
+    .scroll-to-top { background-color: var(--accent) !important; color: #fff !important; border-radius: 50% !important; }
   </style>
 </head>
 <body>
@@ -84,10 +46,8 @@
       name: 'Bettbox Docs',
       repo: 'appshubcc/Bettbox',
       loadSidebar: true,
-      auto2top: true,
-      subMaxLevel: 3,
-
-      // 语言切换菜单
+      // 【关键修改】强制开启并定义导航栏
+      loadNavbar: false, // 设为 false，我们通过下面的 nav 数组手动注入
       nav: [
         {
           text: '🌐 Language',
@@ -97,37 +57,24 @@
           ]
         }
       ],
-
-      // 多语言路由别名
+      auto2top: true,
+      subMaxLevel: 3,
       alias: {
         '/en/.*/_sidebar.md': '/en/_sidebar.md',
         '/en/': '/en/README.md',
         '/.*/_sidebar.md': '/_sidebar.md',
       },
-
-      // 搜索配置
       search: {
         maxAge: 86400000,
         paths: 'auto',
         placeholder: { '/en/': 'Search...', '/': '搜索文档...' },
         noData: { '/en/': 'No results!', '/': '未找到结果' }
       },
-
-      // 深色模式设置
       darklightTheme: {
         siteFont: 'PT Sans',
         defaultTheme: 'light',
         dark: { accent: '#42b983', background: '#0d1117', textColor: '#c9d1d9' },
         light: { accent: '#42b983', background: '#ffffff', textColor: '#24292f' }
-      },
-
-      // 返回顶部插件
-      scrollToTop: {
-        auto: true,
-        text: '↑',
-        right: 20,
-        bottom: 20,
-        offset: 500
       }
     }
 
