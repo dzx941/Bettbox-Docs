@@ -13,11 +13,26 @@
   <style>
     :root {
       --accent: #42b983;
-      /* 进度条高度 */
       --docsify-progress-height: 3px;
+      /* 定义挂角颜色变量 */
+      --github-corner-bg: var(--accent);
+      --github-corner-color: #ffffff;
     }
     
-    /* 1. 按钮风格 (KBD) 美化 */
+    /* 1. 挂角随主题变化逻辑 */
+    body.dark {
+      /* 深色模式下，挂角背景改为更深邃的颜色或保持强调色 */
+      --github-corner-bg: #161b22; 
+      --github-corner-color: var(--accent);
+    }
+    
+    .github-corner svg {
+      fill: var(--github-corner-bg) !important;
+      color: var(--github-corner-color) !important;
+      transition: all 0.3s ease;
+    }
+
+    /* 2. 按钮风格 (KBD) */
     kbd {
       background-color: var(--accent);
       color: #ffffff !important;
@@ -30,10 +45,9 @@
       font-size: 0.85em;
       font-weight: bold;
       display: inline-block;
-      line-height: 1.4;
     }
 
-    /* 2. 阅读进度条样式 */
+    /* 3. 阅读进度条 */
     .progress-bar {
       position: fixed;
       top: 0;
@@ -45,44 +59,46 @@
       transition: width 0.2s;
     }
 
-    /* 3. 返回顶部小火箭美化 */
+    /* 4. 返回顶部小火箭 */
     .scroll-to-top {
       background-color: var(--accent) !important;
       color: #fff !important;
       border-radius: 50% !important;
       width: 40px !important;
       height: 40px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
     }
 
-    /* 4. 深色模式下的特殊适配 */
-    body.dark {
-      --accent: #42b983; /* 保持深色模式下的主题色一致 */
-    }
-    
-    .github-corner svg {
-      fill: var(--accent);
-      color: #fff;
+    /* 5. 导航栏自适应 */
+    body.dark .app-nav a {
+      color: #c9d1d9;
     }
   </style>
 </head>
 <body>
   <div class="progress-bar" id="progress-bar"></div>
-
   <div id="app">加载中...</div>
-  
+
   <script>
     window.$docsify = {
       name: 'Bettbox Docs',
-      repo: 'appshubcc/Bettbox', 
+      repo: 'appshubcc/Bettbox',
       loadSidebar: true,
-      subMaxLevel: 3,
       auto2top: true,
+      subMaxLevel: 3,
 
-      // 多语言配置
+      // 语言切换菜单
+      nav: [
+        {
+          text: '🌐 Language',
+          items: [
+            { text: '简体中文', link: '/' },
+            { text: 'English', link: '/en/' }
+          ]
+        }
+      ],
+
+      // 多语言路由别名
       alias: {
         '/en/.*/_sidebar.md': '/en/_sidebar.md',
         '/en/': '/en/README.md',
@@ -97,26 +113,15 @@
         noData: { '/en/': 'No results!', '/': '未找到结果' }
       },
 
-      // 缓存控制
-      requestHeaders: { 'cache-control': 'max-age=0' },
-
-      // 深色模式配置
+      // 深色模式设置
       darklightTheme: {
         siteFont: 'PT Sans',
         defaultTheme: 'light',
-        dark: {
-          accent: '#42b983',
-          background: '#0d1117',
-          textColor: '#c9d1d9',
-        },
-        light: {
-          accent: '#42b983',
-          background: '#ffffff',
-          textColor: '#24292f',
-        }
+        dark: { accent: '#42b983', background: '#0d1117', textColor: '#c9d1d9' },
+        light: { accent: '#42b983', background: '#ffffff', textColor: '#24292f' }
       },
 
-      // 返回顶部插件配置
+      // 返回顶部插件
       scrollToTop: {
         auto: true,
         text: '↑',
@@ -126,7 +131,7 @@
       }
     }
 
-    // 阅读进度条逻辑
+    // 进度条逻辑
     window.onscroll = function() {
       var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -139,7 +144,6 @@
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  
   <script src="//gcore.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
 </body>
 </html>
