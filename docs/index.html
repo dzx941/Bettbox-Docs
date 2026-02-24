@@ -12,35 +12,38 @@
   <style>
     :root {
       --accent: #42b983;
-      --corner-bg: var(--accent);
-      --corner-octo: #fff;
     }
     
-    /* 1. GitHub 挂角自适应 */
-    body.light { --corner-bg: var(--accent); --corner-octo: #fff; }
-    body.dark { --corner-bg: #161b22; --corner-octo: var(--accent); }
-
+    /* 1. GitHub 挂角变色逻辑 - 强制优先级 */
     .github-corner svg {
-      fill: var(--corner-bg) !important;
-      color: var(--corner-octo) !important;
+      fill: var(--accent) !important; /* 默认绿底 */
+      color: #fff !important;         /* 默认白猫 */
       transition: all 0.3s ease;
       z-index: 99;
     }
 
-    /* 2. 导航栏 (Navbar) 位置微调 */
+    /* 当插件切换到 dark 类时，反转挂角颜色 */
+    body.dark .github-corner svg {
+      fill: #161b22 !important;       /* 深色背景 */
+      color: var(--accent) !important; /* 绿色小猫 */
+    }
+
+    /* 2. 导航栏 (Navbar) 与下拉菜单适配 */
     .app-nav {
       margin: 15px 60px 0 0 !important;
       z-index: 100 !important;
     }
     
-    body.dark .app-nav li, body.dark .app-nav a, body.dark .app-nav strong {
+    /* 深色模式文字与下拉框适配 */
+    body.dark .app-nav li, 
+    body.dark .app-nav a, 
+    body.dark .app-nav strong {
       color: #c9d1d9 !important;
     }
     
-    /* 下拉菜单背景适配 */
     body.dark .app-nav li ul {
       background-color: #161b22 !important;
-      border-color: #30363d !important;
+      border: 1px solid #30363d !important;
     }
 
     /* 3. 进度条 */
@@ -54,7 +57,7 @@
       z-index: 1001;
     }
 
-    /* 4. 返回顶部 */
+    /* 4. UI 细节组件 */
     .scroll-to-top {
       background-color: var(--accent) !important;
       color: #fff !important;
@@ -62,7 +65,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
-    /* 5. 按钮美化 (KBD) */
     kbd {
       background-color: var(--accent);
       color: #ffffff !important;
@@ -81,26 +83,21 @@
     window.$docsify = {
       name: 'Bettbox Docs',
       repo: 'appshubcc/Bettbox',
-      
       basePath: '', 
       loadSidebar: true,
-      loadNavbar: true, // 必须开启
+      loadNavbar: true,
       auto2top: true,
       subMaxLevel: 3,
 
-      // 【核心配置】别名映射逻辑，实现多语言顶栏切换
       alias: {
-        // 英文环境映射
+        // 路径映射：确保多语言顶栏/侧栏正确加载
         '/en/_navbar.md': '/en/_navbar.md',
         '/en/_sidebar.md': '/en/_sidebar.md',
         '/en/': '/en/README.md',
-        
-        // 默认（中文）环境映射
         '/_navbar.md': '/_navbar.md',
         '/_sidebar.md': '/_sidebar.md'
       },
 
-      // 搜索配置
       search: {
         maxAge: 86400000,
         paths: 'auto',
@@ -108,7 +105,6 @@
         noData: { '/en/': 'No results!', '/': '未找到结果' }
       },
 
-      // 深色模式
       darklightTheme: {
         siteFont: 'PT Sans',
         defaultTheme: 'light',
@@ -116,7 +112,6 @@
         light: { accent: '#42b983', background: '#ffffff', textColor: '#24292f' }
       },
 
-      // 返回顶部
       scrollToTop: {
         auto: true,
         text: '↑',
