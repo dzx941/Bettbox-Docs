@@ -2,90 +2,144 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Bettbox Docs</title>
+  <title>Bettbox Docs - 现代化 Android 代理工具指南</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Bettbox (原名 LiClash) 官方文档，基于 Mihomo 内核的 Android 代理工具">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="icon" href="favicon.png" type="image/x-icon" />
-
+  
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/style.min.css">
-
+  <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css">
+  
   <style>
-    body, #app, .content, .sidebar, .sidebar-nav, .search, .search input {
-      background-color: var(--background) !important;
-      color: var(--textColor) !important;
+    :root {
+      --accent: #42b983;
+      /* 进度条高度 */
+      --docsify-progress-height: 3px;
     }
-    .sidebar-nav li a { color: var(--textColor) !important; }
-    .sidebar-nav li.active > a { color: var(--accent) !important; border-right: 2px solid var(--accent); }
-    .search input { border: 1px solid var(--accent) !important; }
-    .github-corner svg { fill: var(--textColor) !important; color: var(--background) !important; transition: all 0.2s; }
-    * { transition: background-color 0.2s, color 0.2s; }
     
-    /* 语言切换器样式优化 */
-    .language-picker { position: fixed; top: 10px; right: 60px; z-index: 10; }
-    .language-picker a { font-size: 14px; text-decoration: none; color: var(--accent); font-weight: bold; border: 1px solid var(--accent); padding: 2px 8px; border-radius: 4px; }
+    /* 1. 按钮风格 (KBD) 美化 */
+    kbd {
+      background-color: var(--accent);
+      color: #ffffff !important;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+      padding: 2px 6px;
+      margin: 0 2px;
+      font-family: inherit;
+      font-size: 0.85em;
+      font-weight: bold;
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    /* 2. 阅读进度条样式 */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: var(--docsify-progress-height);
+      background-color: var(--accent);
+      z-index: 999;
+      transition: width 0.2s;
+    }
+
+    /* 3. 返回顶部小火箭美化 */
+    .scroll-to-top {
+      background-color: var(--accent) !important;
+      color: #fff !important;
+      border-radius: 50% !important;
+      width: 40px !important;
+      height: 40px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
+
+    /* 4. 深色模式下的特殊适配 */
+    body.dark {
+      --accent: #42b983; /* 保持深色模式下的主题色一致 */
+    }
+    
+    .github-corner svg {
+      fill: var(--accent);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
-  <div class="language-picker">
-    <a href="#/">CN</a> | <a href="#/en/">EN</a>
-  </div>
+  <div class="progress-bar" id="progress-bar"></div>
 
-  <div id="app">Loading...</div>
-
+  <div id="app">加载中...</div>
+  
   <script>
     window.$docsify = {
-      name: 'Bettbox',
-      repo: 'https://github.com/dzx941/Bettbox-Docs',
-      
-      // 1. 多语言配置核心
+      name: 'Bettbox Docs',
+      repo: 'appshubcc/Bettbox', 
       loadSidebar: true,
+      subMaxLevel: 3,
       auto2top: true,
-      // 这里的相对路径会自动匹配当前语言文件夹下的侧边栏
+
+      // 多语言配置
       alias: {
-        // 1. 匹配所有以 /en/ 开头的二级、三级目录，强制指向英文侧边栏
-        '/en/(.*)/_sidebar.md': '/en/_sidebar.md',
-        
-        // 2. 匹配根目录下英文文件夹的首页
+        '/en/.*/_sidebar.md': '/en/_sidebar.md',
         '/en/': '/en/README.md',
-
-        // 3. 匹配中文版的子目录侧边栏（排除掉 /en/ 开头的路径）
-        // 这里的 [^en].* 是为了防止中文规则抢占英文规则
-        '/((?!en).+)/_sidebar.md': '/_sidebar.md',
-      },
-      // 根据路径自动切换首页链接
-      nameLink: {
-        '/en/': '#/en/',
-        '/': '#/'
+        '/.*/_sidebar.md': '/_sidebar.md',
       },
 
-      // 2. 搜索插件适配多语言
+      // 搜索配置
       search: {
+        maxAge: 86400000,
         paths: 'auto',
-        placeholder: {
-          '/en/': 'Search',
-          '/': '搜索'
+        placeholder: { '/en/': 'Search...', '/': '搜索文档...' },
+        noData: { '/en/': 'No results!', '/': '未找到结果' }
+      },
+
+      // 缓存控制
+      requestHeaders: { 'cache-control': 'max-age=0' },
+
+      // 深色模式配置
+      darklightTheme: {
+        siteFont: 'PT Sans',
+        defaultTheme: 'light',
+        dark: {
+          accent: '#42b983',
+          background: '#0d1117',
+          textColor: '#c9d1d9',
         },
-        noData: {
-          '/en/': 'No Results',
-          '/': '找不到结果'
+        light: {
+          accent: '#42b983',
+          background: '#ffffff',
+          textColor: '#24292f',
         }
       },
 
-      darklightTheme: {
-        defaultTheme: 'auto',
-        dark: { accent: '#42b983', background: '#1c1c1c', textColor: '#e0e0e0' },
-        light: { accent: '#42b983', background: '#ffffff', textColor: '#34495e' }
+      // 返回顶部插件配置
+      scrollToTop: {
+        auto: true,
+        text: '↑',
+        right: 20,
+        bottom: 20,
+        offset: 500
       }
     }
+
+    // 阅读进度条逻辑
+    window.onscroll = function() {
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+    };
   </script>
 
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
-  <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
-  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="//gcore.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+  <script src="//gcore.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
 </body>
 </html>
