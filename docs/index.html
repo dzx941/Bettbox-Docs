@@ -16,7 +16,7 @@
       --corner-octo: #fff;
     }
     
-    /* 1. 挂角变色：增强优先级 */
+    /* 1. GitHub 挂角自适应深色模式 */
     body.light { --corner-bg: var(--accent); --corner-octo: #fff; }
     body.dark { --corner-bg: #161b22; --corner-octo: var(--accent); }
 
@@ -24,30 +24,51 @@
       fill: var(--corner-bg) !important;
       color: var(--corner-octo) !important;
       transition: all 0.3s ease;
-      z-index: 99; /* 确保在最顶层但避开菜单 */
+      z-index: 99;
     }
 
-    /* 2. 导航栏位置：避开挂角 */
+    /* 2. 导航栏 (Language 菜单) 位置微调 */
     .app-nav {
-      margin: 15px 60px 0 0 !important; 
-      z-index: 100 !important; /* 必须高于挂角，否则下拉菜单点不到 */
+      margin: 15px 60px 0 0 !important;
+      z-index: 100 !important;
     }
     
-    /* 3. 深色模式文字适配 */
-    body.dark .app-nav li, body.dark .app-nav a, body.dark .app-nav strong {
+    body.dark .app-nav li, body.dark .app-nav a {
       color: #c9d1d9 !important;
     }
     
-    /* 下拉菜单背景适配 */
-    body.dark .app-nav li ul {
-      background-color: #161b22 !important;
-      border-color: #30363d !important;
+    /* 3. 进度条 */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--accent);
+      z-index: 1001;
+      transition: width 0.2s;
     }
 
-    /* 4. 其他组件 */
-    kbd { background-color: var(--accent); color: #ffffff !important; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
-    .progress-bar { position: fixed; top: 0; left: 0; width: 0; height: 3px; background-color: var(--accent); z-index: 1001; }
-    .scroll-to-top { background-color: var(--accent) !important; color: #fff !important; border-radius: 50% !important; z-index: 999; }
+    /* 4. 返回顶部 */
+    .scroll-to-top {
+      background-color: var(--accent) !important;
+      color: #fff !important;
+      border-radius: 50% !important;
+      width: 40px !important;
+      height: 40px !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    }
+
+    /* 5. 按钮美化 (KBD) */
+    kbd {
+      background-color: var(--accent);
+      color: #ffffff !important;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-weight: bold;
+      border: none;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -58,30 +79,24 @@
     window.$docsify = {
       name: 'Bettbox Docs',
       repo: 'appshubcc/Bettbox',
-      loadSidebar: true,
-      loadNavbar: true, // 开启导航栏支持
       
-      // 直接定义导航内容，解决不显示的问题
-      nav: [
-        {
-          text: '🌐 Language',
-          items: [
-            { text: '简体中文', link: '/' },
-            { text: 'English', link: '/en/' }
-          ]
-        }
-      ],
-
+      // 重要：指向你的文档存放目录
+      basePath: '/docs/', 
+      
+      loadSidebar: true,
+      loadNavbar: true, // 必须开启以加载 docs/_navbar.md
       auto2top: true,
       subMaxLevel: 3,
-      
-      // 路由别名优化
+
+      // 路由别名，确保多语言路径正确
       alias: {
-        '/.*/_sidebar.md': '/_sidebar.md',
-        '/en/.*/_sidebar.md': '/en/_sidebar.md',
-        '/en/': '/en/README.md'
+        '/.*/_navbar.md': '_navbar.md',
+        '/.*/_sidebar.md': '_sidebar.md',
+        '/en/': 'en/README.md',
+        '/en/_sidebar.md': 'en/_sidebar.md'
       },
 
+      // 搜索配置
       search: {
         maxAge: 86400000,
         paths: 'auto',
@@ -89,11 +104,21 @@
         noData: { '/en/': 'No results!', '/': '未找到结果' }
       },
 
+      // 深色模式配置
       darklightTheme: {
         siteFont: 'PT Sans',
         defaultTheme: 'light',
         dark: { accent: '#42b983', background: '#0d1117', textColor: '#c9d1d9' },
         light: { accent: '#42b983', background: '#ffffff', textColor: '#24292f' }
+      },
+
+      // 返回顶部配置
+      scrollToTop: {
+        auto: true,
+        text: '↑',
+        right: 20,
+        bottom: 20,
+        offset: 500
       }
     }
 
