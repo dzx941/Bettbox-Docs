@@ -53,10 +53,12 @@ docsify serve .
 .
 ├── index.html          # 文档入口与核心配置 (多语言/暗黑模式逻辑)
 ├── _sidebar.md         # 中文侧边栏
+├── _navbar.md         # 中文顶栏
 ├── README.md           # 中文首页 (当前文件即仓库介绍)
 ├── getting-started.md  # 中文快速开始
 ├── en/                 # 英文文档根目录
 │   ├── _sidebar.md     # 英文侧边栏
+     ├── _navbar.md      # 英文顶栏
 │   ├── README.md       # 英文首页
 │   └── ...             # 其他英文文档
 └── guide/              # 功能指南目录 (中/英子目录)
