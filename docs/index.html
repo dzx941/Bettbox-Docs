@@ -14,64 +14,56 @@
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css">
   
-<style>
-  :root {
-    --accent: #42b983;
-  }
+  <style>
+    :root {
+      --accent: #42b983;
+    }
 
-  /* 1. 基础样式：通过 ID 和 class 叠加增加权重 */
-  #app + .github-corner svg, 
-  .github-corner svg {
-    fill: var(--accent) !important;
-    color: #ffffff !important;
-    transition: all 0.3s ease;
-    z-index: 99;
-  }
+    /* 1. GitHub 挂角基础样式与动画 */
+    .github-corner svg {
+      transition: all 0.3s ease;
+      z-index: 99;
+    }
 
-  /* 2. 深色模式下的强制切换 */
-  /* 该插件切换时会在 body 上添加 class，我们必须精准捕捉 */
-  body.dark .github-corner svg,
-  [data-theme='dark'] .github-corner svg {
-    fill: #161b22 !important; /* GitHub 深色背景色 */
-    color: var(--accent) !important;
-  }
+    .github-corner:hover .octo-arm {
+      animation: octocat-wave 560ms ease-in-out;
+    }
 
-  /* 针对 SVG 内部 path 的二次加固 */
-  body.dark .github-corner .octo-arm,
-  body.dark .github-corner .octo-body,
-  [data-theme='dark'] .github-corner .octo-arm,
-  [data-theme='dark'] .github-corner .octo-body {
-    fill: var(--accent) !important;
-  }
+    @keyframes octocat-wave {
+      0%, 100% { transform: rotate(0); }
+      20%, 60% { transform: rotate(-25deg); }
+      40%, 80% { transform: rotate(10deg); }
+    }
 
-  /* 3. 悬停动画 */
-  .github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-  @keyframes octocat-wave {
-    0%, 100% { transform: rotate(0); }
-    20%, 60% { transform: rotate(-25deg); }
-    40%, 80% { transform: rotate(10deg); }
-  }
+    /* 2. 左上角 LOGO 适配 */
+    .sidebar .app-name-link img {
+      width: 60px;
+      height: auto;
+      transition: all 0.3s ease;
+    }
 
-  /* 4. 导航栏位置适配 */
-  .app-nav {
-    margin: 15px 60px 0 0 !important;
-    z-index: 100 !important;
-  }
+    /* 3. 导航栏位置适配 */
+    .app-nav {
+      margin: 15px 60px 0 0 !important;
+      z-index: 100 !important;
+    }
 
-  /* 进度条基础样式 (补全) */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background: var(--accent);
-    z-index: 999;
-  }
-</style>
-  
+    /* 4. 页面顶部进度条 */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 999;
+    }
+
+    /* 5. 解决内容被导航栏遮挡的小修正 */
+    .content {
+      padding-top: 60px !important;
+    }
+  </style>
 </head>
 <body>
   <div class="progress-bar" id="progress-bar"></div>
@@ -88,7 +80,6 @@
       subMaxLevel: 3,
 
       alias: {
-        // 路径映射：确保多语言顶栏/侧栏正确加载
         '/en/_navbar.md': '/en/_navbar.md',
         '/en/_sidebar.md': '/en/_sidebar.md',
         '/en/': '/en/README.md',
@@ -117,9 +108,43 @@
         bottom: 20,
         offset: 500
       }
+    };
+
+    // --- 核心逻辑：强制修正 GitHub 挂角颜色 ---
+    function applyGithubTheme() {
+      const svg = document.querySelector('.github-corner svg');
+      if (!svg) return;
+      
+      // 检测 body 是否包含 dark 类名，或者检查本地存储
+      const isDark = document.body.classList.contains('dark') || 
+                     localStorage.getItem('DARK_LIGHT_THEME') === 'dark';
+
+      if (isDark) {
+        // 深色模式：深色背景 + 绿色小猫
+        svg.style.setProperty('fill', '#161b22', 'important');
+        svg.style.setProperty('color', '#42b983', 'important');
+      } else {
+        // 浅色模式：绿色背景 + 白色小猫
+        svg.style.setProperty('fill', '#42b983', 'important');
+        svg.style.setProperty('color', '#ffffff', 'important');
+      }
     }
 
-    // 进度条逻辑
+    // 使用 MutationObserver 监听主题切换导致的 body class 变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          applyGithubTheme();
+        }
+      });
+    });
+    observer.observe(document.body, { attributes: true });
+
+    // 初始加载及延迟补丁
+    document.addEventListener('DOMContentLoaded', applyGithubTheme);
+    window.addEventListener('load', () => setTimeout(applyGithubTheme, 300));
+
+    // --- 进度条逻辑 ---
     window.onscroll = function() {
       var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -129,6 +154,7 @@
     };
   </script>
 
+  <!-- 插件脚本 -->
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
