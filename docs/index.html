@@ -42,7 +42,7 @@
       transition: all 0.3s ease;
     }
 
-    /* 3. 导航栏位置适配 */
+    /* 3. 导航栏位置适配（防止遮挡挂角） */
     .app-nav {
       margin: 15px 60px 0 0 !important;
       z-index: 100 !important;
@@ -57,11 +57,6 @@
       height: 3px;
       background: var(--accent);
       z-index: 999;
-    }
-
-    /* 5. 解决内容被导航栏遮挡的小修正 */
-    .content {
-      padding-top: 60px !important;
     }
   </style>
 </head>
@@ -78,6 +73,7 @@
       loadNavbar: true,
       auto2top: true,
       subMaxLevel: 3,
+      logo: 'favicon.png', // 侧边栏左上角图标
 
       alias: {
         '/en/_navbar.md': '/en/_navbar.md',
@@ -110,39 +106,39 @@
       }
     };
 
-    // --- 核心逻辑：强制修正 GitHub 挂角颜色 ---
+    // --- 实时同步逻辑：强制修正 GitHub 挂角颜色 ---
     function applyGithubTheme() {
       const svg = document.querySelector('.github-corner svg');
       if (!svg) return;
       
-      // 检测 body 是否包含 dark 类名，或者检查本地存储
+      // 实时获取主题状态
       const isDark = document.body.classList.contains('dark') || 
                      localStorage.getItem('DARK_LIGHT_THEME') === 'dark';
 
       if (isDark) {
-        // 深色模式：深色背景 + 绿色小猫
         svg.style.setProperty('fill', '#161b22', 'important');
         svg.style.setProperty('color', '#42b983', 'important');
       } else {
-        // 浅色模式：绿色背景 + 白色小猫
         svg.style.setProperty('fill', '#42b983', 'important');
         svg.style.setProperty('color', '#ffffff', 'important');
       }
     }
 
-    // 使用 MutationObserver 监听主题切换导致的 body class 变化
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          applyGithubTheme();
-        }
-      });
+    // 1. 监听 body 属性变化（处理切换时的类名改动）
+    const observer = new MutationObserver(() => {
+      applyGithubTheme();
     });
-    observer.observe(document.body, { attributes: true });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // 初始加载及延迟补丁
+    // 2. 监听点击事件（处理按钮操作，双重延时确保动画后校准）
+    document.addEventListener('click', () => {
+      setTimeout(applyGithubTheme, 50);
+      setTimeout(applyGithubTheme, 300);
+    });
+
+    // 3. 初始化加载
     document.addEventListener('DOMContentLoaded', applyGithubTheme);
-    window.addEventListener('load', () => setTimeout(applyGithubTheme, 300));
+    window.addEventListener('load', applyGithubTheme);
 
     // --- 进度条逻辑 ---
     window.onscroll = function() {
@@ -154,7 +150,7 @@
     };
   </script>
 
-  <!-- 插件脚本 -->
+  <!-- 插件依赖 -->
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
