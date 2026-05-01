@@ -17,16 +17,20 @@ SS, SSR, VMess, VLESS, Trojan, Snell v1-v3, Tuic, Hysteria2, and more. For detai
 
 ---
 
-<div style="opacity: 0.6; filter: grayscale(50%);">
+<div style="opacity: 0.6;">
+<details>
+<head>
+<summary style="cursor: pointer; font-size: 0.85em;">🔍 Discover the Other Side (Click to expand)</summary>
 
-### 🔍 <small>Discover the Other Side of Bettbox</small>
+<br>
 
 <small>
-If you've navigated through the troubleshooting steps above, why not take a moment to explore some "hidden gestures" on the main interface:
+Since you've made it this far, why not try some "unusual" gestures on the main screen:
 
-1. **Personalized Identity**: Who says the home screen has to be static? Try **Long-pressing** the <kbd>✎ Pencil button</kbd> on the top right to give your workspace a unique nickname.
-2. **Visual Rebranding**: Bored with the default look? **Long-press** the official <kbd>LOGO</kbd> on the top right. Pick your favorite image from your gallery to give Bettbox a fresh new vibe.
-   > 💡 **Quick Tip**: This action requires "Storage Permission" to access and load your custom image from the gallery.
+1. **Personalized Identity**: **Long-press** the <kbd>✎ Pencil button</kbd> on the top right to give your home screen a nickname.
+2. **Visual Rebranding**: **Long-press** the official <kbd>LOGO</kbd> to pick a custom image from your gallery.
+   > 💡 **Note**: "Storage Permission" is required to access your gallery.
 </small>
 
+</details>
 </div>
