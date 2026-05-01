@@ -5,12 +5,28 @@
 * **检查节点**：手动进入节点选择界面，点击延迟测试（⚡图标），确认节点是否有响应。
 
 ### 2. 如何防止后台被杀？
-由于安卓系统限制，请尝试以下操作
-1.  前往 <kbd>更多</kbd> ➜ <kbd>其他</kbd>。里面打开**强化后台**和**休眠支持**。
-2.  在系统任务管理界面给 Bettbox 加上 **小锁**。
-3.  在系统设置中将 Bettbox 的电池策略设为 **不限制/无限制**。
-4.  开启“常驻通知栏”。
+由于安卓系统限制，请尝试以下操作：
+1. 前往 <kbd>更多</kbd> ➜ <kbd>其他</kbd>。里面打开 **强化后台** 和 **休眠支持**。
+2. 在系统任务管理界面给 Bettbox 加上 **小锁**。
+3. 在系统设置中将 Bettbox 的电池策略设为 **不限制/无限制**。
+4. 开启“常驻通知栏”。
 
 ### 3. 支持哪些协议？
 得益于 Mihomo (Clash Meta) 内核，Bettbox 支持：
-SS, SSR, VMess, VLESS, Trojan, Snell v1-v3, Tuic, Hysteria2 等。具体可参考:[虚空终端 Docs](https://wiki.metacubex.one/config/)
+SS, SSR, VMess, VLESS, Trojan, Snell v1-v3, Tuic, Hysteria2 等。具体可参考：[虚空终端 Docs](https://wiki.metacubex.one/config/)
+
+---
+
+<div style="opacity: 0.6; filter: grayscale(50%);">
+
+### 🔍 <small>发现 Bettbox 的另一面</small>
+
+<small>
+如果你已经尝试了以上所有排障方法，不妨放松一下，去探索一些主界面的“隐藏手势”：
+
+1. **拒绝千篇一律**：谁说首页只能叫主页？试试 **长按** 右上角的 <kbd>✎ 铅笔按钮</kbd>，给它起个你专属的绰号。
+2. **视觉重塑计划**：看腻了默认图标？**长按** 右上角的官方 <kbd>LOGO</kbd>，准备好你相册里最帅的图片，给它换个心情。
+   > 💡 **小提示**：此操作需要授予软件“存储权限”，否则它没法从你的相册里搬东西。
+</small>
+
+</div>
