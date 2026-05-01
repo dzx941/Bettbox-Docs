@@ -14,27 +14,37 @@
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css">
   
-  <style>
+<style>
   :root {
     --accent: #42b983;
   }
 
-  /* 1. GitHub 挂角基础样式 */
+  /* 1. 基础样式：通过 ID 和 class 叠加增加权重 */
+  #app + .github-corner svg, 
   .github-corner svg {
-    fill: var(--accent) !important; /* 默认浅色模式：绿底 */
-    color: #fff !important;         /* 默认浅色模式：白猫 */
+    fill: var(--accent) !important;
+    color: #ffffff !important;
     transition: all 0.3s ease;
     z-index: 99;
   }
 
-  /* 2. 深色模式下的强制变色 */
-  /* 当 body 包含 .dark 类时（由插件自动切换），改变 SVG 颜色 */
-  body.dark .github-corner svg {
-    fill: #161b22 !important;       /* 深色模式：深黑底（符合 GitHub 原生深色风格） */
-    color: var(--accent) !important; /* 深色模式：绿色小猫 */
+  /* 2. 深色模式下的强制切换 */
+  /* 该插件切换时会在 body 上添加 class，我们必须精准捕捉 */
+  body.dark .github-corner svg,
+  [data-theme='dark'] .github-corner svg {
+    fill: #161b22 !important; /* GitHub 深色背景色 */
+    color: var(--accent) !important;
   }
 
-  /* 鼠标悬停时的动画（可选，增加互动感） */
+  /* 针对 SVG 内部 path 的二次加固 */
+  body.dark .github-corner .octo-arm,
+  body.dark .github-corner .octo-body,
+  [data-theme='dark'] .github-corner .octo-arm,
+  [data-theme='dark'] .github-corner .octo-body {
+    fill: var(--accent) !important;
+  }
+
+  /* 3. 悬停动画 */
   .github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
   }
@@ -44,10 +54,21 @@
     40%, 80% { transform: rotate(10deg); }
   }
 
-  /* 3. 导航栏 (Navbar) 适配（防止挡住挂角） */
+  /* 4. 导航栏位置适配 */
   .app-nav {
     margin: 15px 60px 0 0 !important;
     z-index: 100 !important;
+  }
+
+  /* 进度条基础样式 (补全) */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--accent);
+    z-index: 999;
   }
 </style>
   
