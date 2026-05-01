@@ -10,70 +10,42 @@
   <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css">
   
   <style>
-    :root {
-      --accent: #42b983;
-    }
-    
-    /* 1. GitHub 挂角变色逻辑 - 强制优先级 */
-    .github-corner svg {
-      fill: var(--accent) !important; /* 默认绿底 */
-      color: #fff !important;         /* 默认白猫 */
-      transition: all 0.3s ease;
-      z-index: 99;
-    }
+  :root {
+    --accent: #42b983;
+  }
 
-    /* 当插件切换到 dark 类时，反转挂角颜色 */
-    body.dark .github-corner svg {
-      fill: #161b22 !important;       /* 深色背景 */
-      color: var(--accent) !important; /* 绿色小猫 */
-    }
+  /* 1. GitHub 挂角基础样式 */
+  .github-corner svg {
+    fill: var(--accent) !important; /* 默认浅色模式：绿底 */
+    color: #fff !important;         /* 默认浅色模式：白猫 */
+    transition: all 0.3s ease;
+    z-index: 99;
+  }
 
-    /* 2. 导航栏 (Navbar) 与下拉菜单适配 */
-    .app-nav {
-      margin: 15px 60px 0 0 !important;
-      z-index: 100 !important;
-    }
-    
-    /* 深色模式文字与下拉框适配 */
-    body.dark .app-nav li, 
-    body.dark .app-nav a, 
-    body.dark .app-nav strong {
-      color: #c9d1d9 !important;
-    }
-    
-    body.dark .app-nav li ul {
-      background-color: #161b22 !important;
-      border: 1px solid #30363d !important;
-    }
+  /* 2. 深色模式下的强制变色 */
+  /* 当 body 包含 .dark 类时（由插件自动切换），改变 SVG 颜色 */
+  body.dark .github-corner svg {
+    fill: #161b22 !important;       /* 深色模式：深黑底（符合 GitHub 原生深色风格） */
+    color: var(--accent) !important; /* 深色模式：绿色小猫 */
+  }
 
-    /* 3. 进度条 */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background-color: var(--accent);
-      z-index: 1001;
-    }
+  /* 鼠标悬停时的动画（可选，增加互动感） */
+  .github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+  @keyframes octocat-wave {
+    0%, 100% { transform: rotate(0); }
+    20%, 60% { transform: rotate(-25deg); }
+    40%, 80% { transform: rotate(10deg); }
+  }
 
-    /* 4. UI 细节组件 */
-    .scroll-to-top {
-      background-color: var(--accent) !important;
-      color: #fff !important;
-      border-radius: 50% !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-    }
-
-    kbd {
-      background-color: var(--accent);
-      color: #ffffff !important;
-      border-radius: 4px;
-      padding: 2px 6px;
-      font-weight: bold;
-      border: none;
-    }
-  </style>
+  /* 3. 导航栏 (Navbar) 适配（防止挡住挂角） */
+  .app-nav {
+    margin: 15px 60px 0 0 !important;
+    z-index: 100 !important;
+  }
+</style>
+  
 </head>
 <body>
   <div class="progress-bar" id="progress-bar"></div>
