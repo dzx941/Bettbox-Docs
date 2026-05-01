@@ -14,3 +14,19 @@ Due to Android system limitations, please try the following steps:
 ### 3. Which protocols are supported?
 Thanks to the Mihomo (Clash Meta) core, Bettbox supports:
 SS, SSR, VMess, VLESS, Trojan, Snell v1-v3, Tuic, Hysteria2, and more. For details, refer to: [Mihomo Wiki (MetaCubeX)](https://wiki.metacubex.one/config/)
+
+---
+
+<div style="opacity: 0.6; filter: grayscale(50%);">
+
+### 🔍 <small>Discover the Other Side of Bettbox</small>
+
+<small>
+If you've navigated through the troubleshooting steps above, why not take a moment to explore some "hidden gestures" on the main interface:
+
+1. **Personalized Identity**: Who says the home screen has to be static? Try **Long-pressing** the <kbd>✎ Pencil button</kbd> on the top right to give your workspace a unique nickname.
+2. **Visual Rebranding**: Bored with the default look? **Long-press** the official <kbd>LOGO</kbd> on the top right. Pick your favorite image from your gallery to give Bettbox a fresh new vibe.
+   > 💡 **Quick Tip**: This action requires "Storage Permission" to access and load your custom image from the gallery.
+</small>
+
+</div>
