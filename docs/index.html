@@ -35,20 +35,13 @@
       40%, 80% { transform: rotate(10deg); }
     }
 
-    /* 2. 左上角 LOGO 适配 */
-    .sidebar .app-name-link img {
-      width: 60px;
-      height: auto;
-      transition: all 0.3s ease;
-    }
-
-    /* 3. 导航栏位置适配（防止遮挡挂角） */
+    /* 2. 导航栏位置适配 */
     .app-nav {
       margin: 15px 60px 0 0 !important;
       z-index: 100 !important;
     }
 
-    /* 4. 页面顶部进度条 */
+    /* 3. 页面顶部进度条 */
     .progress-bar {
       position: fixed;
       top: 0;
@@ -73,7 +66,6 @@
       loadNavbar: true,
       auto2top: true,
       subMaxLevel: 3,
-      logo: 'favicon.png', // 侧边栏左上角图标
 
       alias: {
         '/en/_navbar.md': '/en/_navbar.md',
@@ -111,7 +103,6 @@
       const svg = document.querySelector('.github-corner svg');
       if (!svg) return;
       
-      // 实时获取主题状态
       const isDark = document.body.classList.contains('dark') || 
                      localStorage.getItem('DARK_LIGHT_THEME') === 'dark';
 
@@ -124,19 +115,16 @@
       }
     }
 
-    // 1. 监听 body 属性变化（处理切换时的类名改动）
     const observer = new MutationObserver(() => {
       applyGithubTheme();
     });
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // 2. 监听点击事件（处理按钮操作，双重延时确保动画后校准）
     document.addEventListener('click', () => {
       setTimeout(applyGithubTheme, 50);
       setTimeout(applyGithubTheme, 300);
     });
 
-    // 3. 初始化加载
     document.addEventListener('DOMContentLoaded', applyGithubTheme);
     window.addEventListener('load', applyGithubTheme);
 
@@ -150,7 +138,6 @@
     };
   </script>
 
-  <!-- 插件依赖 -->
   <script src="//gcore.jsdelivr.net/npm/docsify@4"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//gcore.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
